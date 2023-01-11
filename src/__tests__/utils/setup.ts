@@ -51,10 +51,10 @@ export const describeWithFixture = (
       const domainRegistry = await DomainRegistryFactory.deploy();
       await domainRegistry.deployed();
 
+
       const seaport = new Seaport(ethers.provider, {
         overrides: {
           contractAddress: seaportContract.address,
-          domainRegistryAddress: domainRegistry.address,
         },
       });
 

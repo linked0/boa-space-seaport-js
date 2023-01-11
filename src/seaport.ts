@@ -135,6 +135,7 @@ export class Seaport {
       this.multicallProvider
     ) as DomainRegistryContract;
 
+    console.log("domainRegistry:", this.domainRegistry.address);
     this.config = {
       ascendingAmountFulfillmentBuffer,
       balanceAndApprovalChecksOnOrderCreation,
@@ -145,7 +146,11 @@ export class Seaport {
       },
     };
 
+    console.log("conduitKeyToConduit:", this.config.conduitKeyToConduit);
+
     this.defaultConduitKey = overrides?.defaultConduitKey ?? NO_CONDUIT;
+
+    console.log("defaultConduitKey:", this.defaultConduitKey);
   }
 
   private _getSigner(accountAddress?: string): Signer {
