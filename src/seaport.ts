@@ -952,6 +952,7 @@ export class Seaport {
   ): TransactionMethods<
     ContractMethodReturnType<DomainRegistryContract, "setDomain">
   > {
+    console.log("$$$$$$$$$$$$$$$$$$ setDomain $$$$$$$$$$$$$$$$$$$$$$$", this.domainRegistry.address);
     const signer = this._getSigner(accountAddress);
 
     return getTransactionMethods(
