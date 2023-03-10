@@ -69,6 +69,7 @@ describeWithFixture("As a user I want to match an order", (fixture) => {
 
       describe("with ETH", () => {
         it("ERC721 <=> ETH", async () => {
+          console.log("matchOrders");
           const { seaport } = fixture;
 
           const { executeAllActions } = await seaport.createOrder(
@@ -274,7 +275,7 @@ describeWithFixture("As a user I want to match an order", (fixture) => {
         });
       });
 
-      describe("with ERC20", () => {
+      describe.only("with ERC20", () => {
         beforeEach(async () => {
           const { testErc20 } = fixture;
 
@@ -307,11 +308,21 @@ describeWithFixture("As a user I want to match an order", (fixture) => {
 
           const order = await executeAllActions();
 
+          console.log("order:", order);
+          console.log("offer:", order.parameters.offer);
+          console.log("consideration:", order.parameters.consideration);
+          console.log("privateListingRecipient: ", privateListingRecipient.address);
+
           const counterOrder = constructPrivateListingCounterOrder(
             order,
             privateListingRecipient.address
           );
+          console.log("counterOrder: ", counterOrder);
+          console.log("counterOrder offer: ", counterOrder.parameters.offer);
+          console.log("counterOrder consideration: ", counterOrder.parameters.consideration);
+
           const fulfillments = getPrivateListingFulfillments(order);
+          console.log("fulfillments:", JSON.stringify(fulfillments));
 
           const ownerToTokenToIdentifierBalances =
             await getBalancesForFulfillOrder(

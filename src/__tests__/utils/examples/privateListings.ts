@@ -1,11 +1,20 @@
 import { BigNumber } from "ethers";
 import {
+  Item,
   MatchOrdersFulfillment,
   Order,
   OrderWithCounter,
 } from "../../../types";
-import { isCurrencyItem } from "../../../utils/item";
-import { generateRandomSalt } from "../../../utils/order";
+
+import { ItemType } from "../../../constants";
+import { randomBytes } from "ethers/lib/utils";
+
+export const isCurrencyItem = ({ itemType }: Item) =>
+  [ItemType.NATIVE, ItemType.ERC20].includes(itemType);
+  
+export const generateRandomSalt = () => {
+  return `0x${Buffer.from(randomBytes(8)).toString("hex").padStart(24, "0")}`;
+};
 
 export const constructPrivateListingCounterOrder = (
   order: OrderWithCounter,
